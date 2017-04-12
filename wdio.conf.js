@@ -1,5 +1,4 @@
 var baseUrl = '';
-var baseUrl2 = '';
 var backendApi = ''; 
 // 'https://manage.auth0.com';
 // 'http://127.0.0.1:8303/';
