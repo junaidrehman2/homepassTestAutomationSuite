@@ -4,11 +4,11 @@
   describe('user details', function() {
 
     it('email should match', function() {
-      userDetails.settings.waitForExist(5000);
+      userDetails.settings.waitForExist();
       userDetails.settings.click();
-      userDetails.profile.waitForExist(5000);
+      userDetails.profile.waitForExist();
       userDetails.profile.click();
-      userDetails.email.waitForExist(5000);
+      userDetails.email.waitForExist();
       var email  = userDetails.email.getText();
       user  = userDetails.getUser(email);  
       expect(email).to.equal(user.email);

@@ -1,9 +1,17 @@
-var baseUrl = 'https://staging-domain-webapp.homepass.com/#/manage';
+var baseUrl = '';
+var backendApi = ''; 
 // 'https://manage.auth0.com/login';
 // 'http://127.0.0.1:8303/';
 
 if (process.env.SERVER === "sandbox"){
-    baseUrl = ''
+    baseUrl = 'https://sandbox-domain-webapp.homepass.com';
+    backendApi = 'https://data-sandbox.homepass.com/';
+} else if (process.env.SERVER === "staging"){
+    baseUrl = 'https://staging-domain-webapp.homepass.com';
+    backendApi = 'https://data-staging.homepass.com/';
+}else if (process.env.SERVER === "prod"){
+    baseUrl = 'https://app.homepass.com';
+    backendApi = 'https://data.homepass.com/';
 }
 
 exports.config = {
@@ -26,8 +34,8 @@ exports.config = {
     './test/example*.js',
     './test/accountPreferences.js',
     './test/userDetails.js',
-    // './test/propertyDetails.js', 
-    './test/propertyList.js'
+    './test/propertyDetails.js', 
+    // './test/propertyList.js'
     ],
     //
     // ============
@@ -71,7 +79,7 @@ exports.config = {
     sync: true,
     //
     // Level of logging verbosity: silent | verbose | command | data | result | error
-    logLevel: 'verbose',
+    logLevel: 'silent',
     //
     // Enables colors for log output.
     coloredLogs: true,
@@ -165,9 +173,18 @@ exports.config = {
           // login.googleLogin(process.env.EMALE, process.env.PASS);
           // browser.debug();
           browser.url('/')
-          browser.localStorage('POST', {key: 'userToken', value: '{"value":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODk5NzI3NTIsImV4cCI6MTUyMTUwODc1MiwiYXVkIjoibUF6eEZ0QlZnWWlTWFRpQlBJWThNWGdBZkZMQjdMOVYiLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.VAHnwE5XrrnDMRcoTzt_pwPXUjTEbbu-ctYAS000mfY"}'});
+          if(process.env.SERVER === 'prod' ){
+              browser.localStorage('POST', {key: 'userToken', value: '{"value":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTE4OTQ2MDMsImV4cCI6MTUyMzQzMDYwMywiYXVkIjoidjFuSnpMZXpOYmliYm1OeHFjSnJaQjdaZm5qODR4bU0iLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.T-Bhke1ZWFNADH0IB8qrgdIqI1lrtFb5kErxYNFq0xM"}'});
+          }else{
+              browser.localStorage('POST', {key: 'userToken', value: '{"value":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODk5NzI3NTIsImV4cCI6MTUyMTUwODc1MiwiYXVkIjoibUF6eEZ0QlZnWWlTWFRpQlBJWThNWGdBZkZMQjdMOVYiLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.VAHnwE5XrrnDMRcoTzt_pwPXUjTEbbu-ctYAS000mfY"}'});
+          }
+          browser.setViewportSize({
+            width: 1200,
+            height: 1000
+        });
           browser.refresh();
-          
+
+
       },
     //
     // Hook that gets executed before the suite starts
@@ -218,5 +235,5 @@ exports.config = {
     // onComplete: function(exitCode) {
     // }
 
-    testApiUrl: "http://localhost:3009/"
+    testApiUrl: backendApi
 }

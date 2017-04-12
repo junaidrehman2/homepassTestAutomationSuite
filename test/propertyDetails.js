@@ -6,37 +6,37 @@ describe('property details', function() {
 	this.timeout(30000);
 
 	it('should go to property details section', function() {
-		propertyPage.img.waitForExist(5000);	
+		propertyPage.img.waitForExist();	
 		propertyPage.img.click();
 		browser.pause(1000);
-		propertyPage.selectedAccount.waitForExist(5000);
+		propertyPage.selectedAccount.waitForExist();
 		propertyPage.selectedAccount.click()	
-		propertyPage.propertySeclectorHorace.waitForExist(5000);
+		propertyPage.propertySeclectorHorace.waitForExist();
 		propertyPage.propertySeclectorHorace.click();
-		propertyPage.detailsTab.waitForExist(5000);
+		propertyPage.detailsTab.waitForExist();
 		propertyPage.detailsTab.click();
-		propertyPage.propertyId.waitForExist(5000);
+		propertyPage.propertyId.waitForExist();
 		propertyId = propertyPage.propertyId.getText(); 
 		horaceStreet = propertyPage.getProperty(propertyId); 
 	});
 
 	it('should upload a Doc', function() {	
 		expect(horaceStreet.mimeLinks.length).to.equal(0);
-		propertyPage.addDocs.waitForExist(5000);
+		propertyPage.addDocs.waitForExist();
 		propertyPage.addDocs.click();
 		browser.frame(propertyPage.filePickerIframe.value);
-		propertyPage.googleDriveFileStackLink.waitForExist(5000);
+		propertyPage.googleDriveFileStackLink.waitForExist();
 		propertyPage.googleDriveFileStackLink.scroll(0, 100);
-		propertyPage.webImgFileStackLink.waitForExist(5000);
+		propertyPage.webImgFileStackLink.waitForExist();
 		propertyPage.webImgFileStackLink.click();
-		propertyPage.webImgFileStackSearchTextBox.waitForExist(5000);
+		propertyPage.webImgFileStackSearchTextBox.waitForExist();
 		propertyPage.webImgFileStackSearchTextBox.setValue('google');
 		propertyPage.webImgFileStackSearchButton.click();
 		propertyPage.firstItemWebImgFileStackSearch.waitForExist(7000);
 		propertyPage.firstItemWebImgFileStackSearch.click();
-		propertyPage.selectFile.waitForExist(5000);
+		propertyPage.selectFile.waitForExist();
 		propertyPage.selectFile.click();
-		propertyPage.uploadButton.waitForExist(5000);
+		propertyPage.uploadButton.waitForExist();
 		propertyPage.uploadButton.click();
 		propertyPage.deleteFileWithGoogleText.waitForExist(10000);
 		expect(propertyPage.fileNameWithGoogleText.isExisting()).to.be.true;
@@ -56,10 +56,10 @@ describe('property details', function() {
 		browser.pause(1000);
 		expect(horaceStreet.refs.length).to.equal(0);
 		propertyPage.addPropertyRef.click();
-		propertyPage.refIdInput.waitForExist(5000);
+		propertyPage.refIdInput.waitForExist();
 		propertyPage.refIdInput.setValue('R2-6767');
 		propertyPage.refIdSaveButton.click();
-		propertyPage.refIdText.waitForExist(5000)
+		propertyPage.refIdText.waitForExist()
 		expect(propertyPage.refIdText.isExisting()).to.be.true;
 		horaceStreet = propertyPage.getProperty(propertyId);
 		expect(horaceStreet.refs.length).to.equal(1);
@@ -67,15 +67,15 @@ describe('property details', function() {
 
 	it('should edit a linked record', function() {	
 		browser.pause(1000);
-		propertyPage.settingsButtonRef.waitForExist(5000);
+		propertyPage.settingsButtonRef.waitForExist();
 		propertyPage.settingsButtonRef.click();
-		propertyPage.editRefId.waitForExist(5000);
+		propertyPage.editRefId.waitForExist();
 		propertyPage.editRefId.click();
-		propertyPage.refIdInput.waitForExist(5000);
+		propertyPage.refIdInput.waitForExist();
 		browser.pause(1000);
 		propertyPage.refIdInput.addValue('4');
 		propertyPage.refIdSaveButton.click();
-		propertyPage.refIdTextEdited.waitForExist(5000);
+		propertyPage.refIdTextEdited.waitForExist();
 		expect(propertyPage.refIdText.isExisting()).to.be.false;
 		expect(propertyPage.refIdTextEdited.isExisting()).to.be.true;
 
@@ -84,7 +84,7 @@ describe('property details', function() {
 
 	it('should remove a linked record', function() {	
 		propertyPage.settingsButtonRefEdited.click();
-		propertyPage.removeLinkedRecord.waitForExist(5000);
+		propertyPage.removeLinkedRecord.waitForExist();
 		propertyPage.removeLinkedRecord.click();
 		browser.pause(500);
 		expect(propertyPage.refIdTextEdited.isExisting()).to.be.false;

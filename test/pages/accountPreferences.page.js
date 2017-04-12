@@ -19,14 +19,12 @@ class accountPreferences {
 
 
 	getAccount(account) {
-		// var res = request('POST', 'https://data-staging.homepass.com/csm/v1/accounts', {
-		// 	headers: {Authorization : 'Basic EvdaQ5PHdmemnssnT9LmQ66T7Q3s4Ey8'}, 
-		// 	json: { accountId : account }
-		// }); 
-
-		var res = request('GET', browser.options.testApiUrl+'account/'+account);
+		var res = request('POST', browser.options.testApiUrl+'csm/v1/accounts', {
+			headers: {Authorization : 'Basic EvdaQ5PHdmemnssnT9LmQ66T7Q3s4Ey8'}, 
+			json: { accountId : account }
+		}); 
 		var account = JSON.parse(res.getBody().toString('utf8'));
-		return account.account; 
+		return account.accounts[0]; 
 	}
 }
 

@@ -46,9 +46,10 @@ class Properties {
 	get propertyId() {return $("//div[text()='Homepass ID']/following-sibling::div");}
 	get vendorSnapshotLink() {return $("//div[text()='Vendor Snapshot']");}
 	get kentPropertyId() {return '5588c2e8b91d24fd0f43a8a0';}
-	// get () {return $("");}
-	// get () {return $("");}
-	// get () {return $("");}
+	get propertyDetailsSettingsButton() {return $("//button[contains(.,'star')]/following-sibling::div");}
+	get archivePropertyLink() {return $("//div[text()='Archive property']");}
+	get unarchivePropertyLink() {return $("//div[text()='Unarchive property']");}
+	get propertyArchived() {return $("//div[text()='archived']");}
 	// get () {return $("");}
 	// get () {return $("");}
 	// get () {return $("");}
@@ -58,7 +59,7 @@ class Properties {
 
 
 	getProperty(property) {
-		var res = request('POST', 'https://data-staging.homepass.com/csm/v1/findListings', {
+		var res = request('POST', browser.options.testApiUrl+'csm/v1/findListings', {
 			headers: {Authorization : 'Basic EvdaQ5PHdmemnssnT9LmQ66T7Q3s4Ey8'}, 
 			json: { listingIds : [property] }
 		}); 

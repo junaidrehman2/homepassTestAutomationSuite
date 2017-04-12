@@ -8,9 +8,12 @@ class UserDetails {
   get mobile() { return $("//div[text()='Mobile']/following-sibling::div"); }
 
   getUser(email) {
-  	var res = request('GET', 'http://localhost:3009/accountuser/'+email);
-    var accountuser = JSON.parse(res.getBody().toString('utf8'));
-    return accountuser.accountUser[0]; 
+    var res = request('POST', browser.options.testApiUrl+'csm/v1/accountUsers', {
+      headers: {Authorization : 'Basic EvdaQ5PHdmemnssnT9LmQ66T7Q3s4Ey8'}, 
+      json: { email : email }
+    }); 
+    var accountUser = JSON.parse(res.getBody().toString('utf8'));
+    return accountUser.accountUsers[0];
   }
 }
 
