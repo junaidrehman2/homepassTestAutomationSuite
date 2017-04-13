@@ -1,17 +1,22 @@
 var baseUrl = '';
-var backendApi = ''; 
-// 'https://manage.auth0.com';
-// 'http://127.0.0.1:8303/';
+var backendApi = '';
+var sandboxToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODk5NzI3NTIsImV4cCI6MTUyMTUwODc1MiwiYXVkIjoibUF6eEZ0QlZnWWlTWFRpQlBJWThNWGdBZkZMQjdMOVYiLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.VAHnwE5XrrnDMRcoTzt_pwPXUjTEbbu-ctYAS000mfY";
+var prodToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTE4OTQ2MDMsImV4cCI6MTUyMzQzMDYwMywiYXVkIjoidjFuSnpMZXpOYmliYm1OeHFjSnJaQjdaZm5qODR4bU0iLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.T-Bhke1ZWFNADH0IB8qrgdIqI1lrtFb5kErxYNFq0xM"; 
+var jwtToken = '';
+
 
 if (process.env.SERVER === "sandbox"){
     baseUrl = 'https://sandbox-domain-webapp.homepass.com';
     backendApi = 'https://data-sandbox.homepass.com/';
+    jwtToken = sandboxToken;
 } else if (process.env.SERVER === "staging"){
     baseUrl = 'https://staging-domain-webapp.homepass.com';
     backendApi = 'https://data-staging.homepass.com/';
+    jwtToken = sandboxToken;
 }else if (process.env.SERVER === "prod"){
     baseUrl = 'https://app.homepass.com';
     backendApi = 'https://data.homepass.com/';
+    jwtToken = prodToken;
 }
 
 exports.config = {
@@ -167,6 +172,9 @@ exports.config = {
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
+    token: jwtToken,
+    
+
     before: function (capabilities, specs) {
       expect  = require('chai').expect; 
           // var login  = require('./test/pages/login.page.js');
@@ -174,9 +182,9 @@ exports.config = {
           // browser.debug();
           browser.url('/')
           if(process.env.SERVER === 'prod' ){
-              browser.localStorage('POST', {key: 'userToken', value: '{"value":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTE4OTQ2MDMsImV4cCI6MTUyMzQzMDYwMywiYXVkIjoidjFuSnpMZXpOYmliYm1OeHFjSnJaQjdaZm5qODR4bU0iLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.T-Bhke1ZWFNADH0IB8qrgdIqI1lrtFb5kErxYNFq0xM"}'});
+              browser.localStorage('POST', {key: 'userToken', value: '{"value":"'+prodToken+'"}'});
           }else{
-              browser.localStorage('POST', {key: 'userToken', value: '{"value":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODk5NzI3NTIsImV4cCI6MTUyMTUwODc1MiwiYXVkIjoibUF6eEZ0QlZnWWlTWFRpQlBJWThNWGdBZkZMQjdMOVYiLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.VAHnwE5XrrnDMRcoTzt_pwPXUjTEbbu-ctYAS000mfY"}'});
+              browser.localStorage('POST', {key: 'userToken', value: '{"value":"'+sandboxToken+'"}'});
           }
           browser.setViewportSize({
             width: 1200,

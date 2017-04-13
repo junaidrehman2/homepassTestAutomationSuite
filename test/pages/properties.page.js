@@ -1,4 +1,5 @@
 var request = require('sync-request');
+var uuidV4 = require('uuid/v4');
 
 
 class Properties {
@@ -68,6 +69,38 @@ class Properties {
 		return property.listings[0];
 	}
 
+	addCheckin(){
+		var res = request('POST', browser.options.testApiUrl+'graphql', {
+			headers: {Authorization : 'Bearer '+browser.options.token}, 
+			json: {  
+				"query":"mutation ($checkinInput:AddCheckinInput!) { addCheckin(input: $checkinInput) { listing { listingId contactCount flaggedCount } checkin {id checkinId ref checkinDate listingContact {id visits lastVisit noteCount hasSentDocs flagged contact{id contactId fullName firstName lastName imageUrl mobile landline email address customer{id customerId}} checkins { edges { node { id checkinId ref checkinDate listingContact {id visits lastVisit noteCount hasSentDocs flagged contact{id contactId fullName firstName lastName imageUrl mobile landline email address customer{id customerId}}} } } }}} } }",
+				"variables":{  
+					"checkinInput":{  
+						"address":"Level 22, 530 Collins St, Melbourne VIC 3000, Australia",
+						"applicationId":"dlWUg9j4lt8QLA3EdQYOXJxBoiJCW7KYVDy0z9Rk",
+						"checkinDate": new Date(),
+						"clientMutationId":"ADD-CHECKIN-4f157ce6-416c-40b4-ae76-acec95c1a197",
+						// "contactId":"58127b645a0966046aa2defc",
+						"contactNote":"This is a Contact note",
+						"contactNoteShared":true,
+						"email":"cmyeoh@gmail.com",
+						"fullName":"Chu automated test",
+						"instrument":"Homepass",
+						"landline":"+6163259845",
+						"listingId":"548e62854be1d336770d7a83",
+						"mobile":"+61430435060",
+						"notify":false,
+						"ref":uuidV4()
+					}
+				}
+			}
+		}); 
+
+		var checkin = JSON.parse(res.getBody().toString('utf8'));
+		return checkin;
+	}
+
+	
 
 }
 
