@@ -1,5 +1,6 @@
 var request = require('sync-request');
 var uuidV4 = require('uuid/v4');
+var moment = require('moment');
 
 
 class Properties {
@@ -51,12 +52,18 @@ class Properties {
 	get archivePropertyLink() {return $("//div[text()='Archive property']");}
 	get unarchivePropertyLink() {return $("//div[text()='Unarchive property']");}
 	get propertyArchived() {return $("//div[text()='archived']");}
-	// get () {return $("");}
-	// get () {return $("");}
-	// get () {return $("");}
-	// get () {return $("");}
-	// get () {return $("");}
-	// get () {return $("");}
+	get testCheckin() {return $("//div[text()='Chu test checkin']");}
+	get testCheckinDate() {return $("//div[text()='Chu test checkin']/following-sibling::div//time");}
+	get contacts() {return $("//div[text()='Contacts']");}
+	get activity() {return $("//div[text()='Activity']");}
+	get checkinMoreButton() {return $("//div[text()='Chu test checkin']/preceding-sibling::div[1]");}
+	get flag() {return $("//div[text()='Flag']");}
+	get unFlag() {return $("//div[text()='Unflag']");}
+	get activityDate() {return $("//div[contains(.,'Chu test checkin')]/following-sibling::div//time");}
+	get activityCheckin() {return $("//div[contains(.,'Chu test checkin')]");}
+	get activityFlag() {return $("//div[contains(.,'Chu test checkin')]/span");}
+	get flaggedElement() {return $("//div[text()='Chu test checkin']/following-sibling::div[contains(.,'FLAGGED')]");}
+
 
 
 	getProperty(property) {
@@ -84,7 +91,7 @@ class Properties {
 						"contactNote":"This is a Contact note",
 						"contactNoteShared":true,
 						"email":"cmyeoh@gmail.com",
-						"fullName":"Chu automated test",
+						"fullName":"Chu test checkin",
 						"instrument":"Homepass",
 						"landline":"+6163259845",
 						"listingId":"548e62854be1d336770d7a83",
@@ -96,12 +103,12 @@ class Properties {
 			}
 		}); 
 
-		var checkin = JSON.parse(res.getBody().toString('utf8'));
-		return checkin;
+		return res.statusCode; 
 	}
 
-	
-
+	compareDates(minToSubtract, checkinDate){
+		return moment().subtract(minToSubtract, 'minutes') <  moment(checkinDate)? true : false;
+	}
 }
 
 module.exports = new Properties();
