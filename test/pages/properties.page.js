@@ -87,7 +87,6 @@ class Properties {
 						"applicationId":"dlWUg9j4lt8QLA3EdQYOXJxBoiJCW7KYVDy0z9Rk",
 						"checkinDate": new Date(),
 						"clientMutationId":"ADD-CHECKIN-4f157ce6-416c-40b4-ae76-acec95c1a197",
-						// "contactId":"58127b645a0966046aa2defc",
 						"contactNote":"This is a Contact note",
 						"contactNoteShared":true,
 						"email":"cmyeoh@gmail.com",
