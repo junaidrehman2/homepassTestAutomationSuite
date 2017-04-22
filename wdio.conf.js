@@ -9,17 +9,17 @@ var jwtToken = '';
 if (process.env.SERVER === "sandbox"){
     baseUrl = 'https://sandbox-domain-webapp.homepass.com';
     backendApi = 'https://data-sandbox.homepass.com/';
-    brochureLink = 'https://live-sandbox.homepass.com/listing/';
+    brochureLink = 'https://live-sandbox.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
     jwtToken = sandboxToken;
 } else if (process.env.SERVER === "staging"){
     baseUrl = 'https://staging-domain-webapp.homepass.com';
     backendApi = 'https://data-staging.homepass.com/';
-    brochureLink = 'https://live-staging.homepass.com/listing/';
+    brochureLink = 'https://live-staging.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
     jwtToken = sandboxToken;
 }else if (process.env.SERVER === "prod"){
     baseUrl = 'https://app.homepass.com';
     backendApi = 'https://data.homepass.com/';
-    brochureLink = 'https://live.homepass.com/listing/';
+    brochureLink = 'https://live.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
     jwtToken = prodToken;
 }
 
@@ -42,7 +42,7 @@ exports.config = {
     './test/pages/*.js',
     './test/accountPreferences.js',
     './test/userDetails.js',
-    // './test/propertyDetails.js', 
+    './test/propertyDetails.js', 
     './test/propertyList.js'
     ],
     //
