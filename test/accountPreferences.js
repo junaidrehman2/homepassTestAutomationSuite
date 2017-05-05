@@ -20,33 +20,6 @@
 
     });
 
-    // it('address should match', function() {
-    //   var address  =  accountPreferences.address.getText(); 
-    //   expect(address).to.contain(account.streetName);
-    //   expect(address).to.contain(account.locality);
-    // });
-
-    // it('mobile should match', function() {
-    //   var phone = accountPreferences.phone.getText()
-    //   if(phone != '') {
-    //   	expect(phone).to.equal(account.phone);
-    //   }else{
-    //   	expect(phone).to.equal('');
-    //   }
-    // });
-
-    // it('logo should match', function() {
-    //   var logo  =  accountPreferences.logo.getAttribute('src'); 
-    //   expect(logo).to.equal(account.imageUrl);
-    // });
-
-    // it('office colors should match', function() {
-    //   var primaryColour  =  accountPreferences.primaryColour.getText(); 
-    //   var accentColour  =  accountPreferences.accentColour.getText(); 
-    //   expect(primaryColour).to.equal(account.primaryColor);
-    //   expect(accentColour).to.equal(account.accentColor);
-    // });
-
     it('sms sender name should match', function() {
       var smsSenderName  =  accountPreferences.smsSenderName.getText(); 
       expect(smsSenderName).to.equal(account.smsFrom);

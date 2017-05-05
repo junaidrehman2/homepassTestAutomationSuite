@@ -17,11 +17,13 @@
     "uuid": "^3.0.1",
     "wdio-mocha-framework": "^0.5.9",
     "wdio-selenium-standalone-service": "0.0.8",
+    "wdio-spec-reporter": "^0.1.0",
     "webdriverio": "^4.0.5"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "sync-request": "^4.0.1",
+    "then-request": "^2.2.0",
     "wdio-mocha-framework": "^0.5.9",
     "wdio-selenium-standalone-service": "0.0.8",
     "wdio-spec-reporter": "^0.1.0",

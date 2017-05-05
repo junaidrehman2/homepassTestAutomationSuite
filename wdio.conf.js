@@ -4,6 +4,7 @@ var brochureLink = '';
 var sandboxToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODk5NzI3NTIsImV4cCI6MTUyMTUwODc1MiwiYXVkIjoibUF6eEZ0QlZnWWlTWFRpQlBJWThNWGdBZkZMQjdMOVYiLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.VAHnwE5XrrnDMRcoTzt_pwPXUjTEbbu-ctYAS000mfY";
 var prodToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTE4OTQ2MDMsImV4cCI6MTUyMzQzMDYwMywiYXVkIjoidjFuSnpMZXpOYmliYm1OeHFjSnJaQjdaZm5qODR4bU0iLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.T-Bhke1ZWFNADH0IB8qrgdIqI1lrtFb5kErxYNFq0xM"; 
 var jwtToken = '';
+var specificListingPageLink = ''; 
 
 
 if (process.env.SERVER === "sandbox"){
@@ -11,6 +12,7 @@ if (process.env.SERVER === "sandbox"){
     backendApi = 'https://data-sandbox.homepass.com/';
     brochureLink = 'https://live-sandbox.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
     jwtToken = sandboxToken;
+    specificListingPageLink = '/manage/accounts/QWNjb3VudDo1OGI5MDBjOGU1NzJlZmYwNjA2NWRjODM=/listings/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=/contacts';
 } else if (process.env.SERVER === "staging"){
     baseUrl = 'https://staging-domain-webapp.homepass.com';
     backendApi = 'https://data-staging.homepass.com/';
@@ -21,6 +23,7 @@ if (process.env.SERVER === "sandbox"){
     backendApi = 'https://data.homepass.com/';
     brochureLink = 'https://live.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
     jwtToken = prodToken;
+    specificListingPageLink = '/manage/accounts/QWNjb3VudDo1N2FjMzY1ZTk3NWMxMTFjNDk1NTc2NmE=/listings/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=/details'
 }
 
 exports.config = {
@@ -40,10 +43,11 @@ exports.config = {
     // Patterns to exclude.
     exclude: [
     './test/pages/*.js',
-    './test/accountPreferences.js',
-    './test/userDetails.js',
-    './test/propertyDetails.js', 
-    './test/propertyList.js'
+    // './test/accountPreferences.js',
+    // './test/userDetails.js',
+    // './test/propertyDetails.js', 
+    // './test/propertyList.js',
+    // './test/brochure.js'
     ],
     //
     // ============
@@ -71,7 +75,7 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 5,
+        maxInstances: 2,
         //
         browserName: 'chrome'
     }],
@@ -104,7 +108,7 @@ exports.config = {
     baseUrl: baseUrl,
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 20000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -152,8 +156,8 @@ exports.config = {
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd'
-        // timeout: 1000000;
+        ui: 'bdd',
+        timeout: 30000
     },
     //
     // =====
@@ -247,5 +251,6 @@ exports.config = {
     // }
 
     testApiUrl: backendApi,
-    brochure: brochureLink
+    brochure: brochureLink,
+    specificListingLink: specificListingPageLink
 }

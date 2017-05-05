@@ -20,6 +20,39 @@ describe('property details', function() {
 		horaceStreet = propertyPage.getProperty(propertyId); 
 	});
 
+	it('add a vendor', function() {	
+		propertyPage.vendorSnapshotLink.waitForExist(); 
+		propertyPage.vendorSnapshotLink.click(); 
+		propertyPage.addVendor.waitForExist();
+		propertyPage.addVendor.click(); 
+		propertyPage.vendorNameInput.waitForExist(); 
+		propertyPage.vendorNameInput.setValue('test Vendor'); 
+		propertyPage.createNewVendorLink.waitForExist(); 
+		propertyPage.createNewVendorLink.click(); 
+		propertyPage.vendorEmailInput.waitForExist();
+		propertyPage.vendorEmailInput.setValue("test@homepass.com");
+		propertyPage.vendorMobileInput.setValue("0406111989");
+		propertyPage.saveVendor.click(); 
+		browser.waitUntil(function () {
+			return propertyPage.addVendorHeaderText.isExisting() === false; 
+		});
+		browser.refresh(); 
+		propertyPage.vendorName.waitForExist(); 
+		expect(propertyPage.vendorName.isExisting()).to.be.true;   
+
+	});
+
+	it('remove a vendor', function() {	
+		propertyPage.vendorMoreButton.waitForExist(); 
+		propertyPage.vendorMoreButton.click(); 
+		browser.pause(500); 
+		propertyPage.removeVendor.click(); 
+		browser.refresh();  
+		expect(propertyPage.vendorName.isExisting()).to.be.false;
+		propertyPage.backArrow.click();    
+
+	});	
+
 	it('should upload a Doc', function() {	
 		expect(horaceStreet.mimeLinks.length).to.equal(0);
 		propertyPage.addDocs.waitForExist();
@@ -32,13 +65,13 @@ describe('property details', function() {
 		propertyPage.webImgFileStackSearchTextBox.waitForExist();
 		propertyPage.webImgFileStackSearchTextBox.setValue('google');
 		propertyPage.webImgFileStackSearchButton.click();
-		propertyPage.firstItemWebImgFileStackSearch.waitForExist(7000);
+		propertyPage.firstItemWebImgFileStackSearch.waitForExist();
 		propertyPage.firstItemWebImgFileStackSearch.click();
 		propertyPage.selectFile.waitForExist();
 		propertyPage.selectFile.click();
 		propertyPage.uploadButton.waitForExist();
 		propertyPage.uploadButton.click();
-		propertyPage.deleteFileWithGoogleText.waitForExist(10000);
+		propertyPage.deleteFileWithGoogleText.waitForExist();
 		expect(propertyPage.fileNameWithGoogleText.isExisting()).to.be.true;
 		horaceStreet = propertyPage.getProperty(propertyId);
 		expect(horaceStreet.mimeLinks.length).to.equal(1);
@@ -46,7 +79,9 @@ describe('property details', function() {
 	
 	it('should delete file', function() {	
 		propertyPage.deleteFileWithGoogleText.click();
-		browser.pause(500);
+		browser.waitUntil(function () {
+			return propertyPage.deleteFileWithGoogleText.isExisting() === false; 
+		});
 		expect(propertyPage.fileNameWithGoogleText.isExisting()).to.be.false;
 		horaceStreet = propertyPage.getProperty(propertyId);
 		expect(horaceStreet.mimeLinks.length).to.equal(0);
@@ -95,7 +130,6 @@ describe('property details', function() {
 		browser.refresh(); 
 		propertyPage.testCheckin.waitForExist(); 
 		var checkinTime= propertyPage.testCheckinDate.getAttribute('datetime');
-		console.log(checkinTime);  
 		expect(propertyPage.compareDates(5, checkinTime)).to.be.true; 
 	});
 
@@ -108,7 +142,7 @@ describe('property details', function() {
 		propertyPage.activity.click(); 
 		propertyPage.activityCheckin.waitForExist();
 		expect(propertyPage.activityFlag.isExisting()).to.be.true
-	 
+
 	});
 
 	it('should unflag the contact', function() {	
@@ -121,8 +155,11 @@ describe('property details', function() {
 		browser.pause(500); 
 		propertyPage.activity.click(); 
 		propertyPage.activityCheckin.waitForExist();
+		browser.waitUntil(function () {
+			return propertyPage.activityFlag.isExisting() === false; 
+		});
 		expect(propertyPage.activityFlag.isExisting()).to.be.false
-	 
+
 	});
 
 });

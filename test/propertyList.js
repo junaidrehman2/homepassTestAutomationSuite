@@ -31,7 +31,8 @@ describe('property list', function() {
 		propertyPage.archivePropertyLink.click(); 
 		browser.pause(500);
 		propertyPage.propertyArchived.waitForExist();
-		propertyPage.detailsTab.click(); 
+		propertyPage.detailsTab.click();
+		propertyPage.propertyId.waitForExist();  
 		expect(propertyPage.propertyArchived.isExisting()).to.be.true;
 		expect(propertyPage.getProperty(propertyPage.propertyId.getText()).archivedAt).to.not.be.undefined;
 	});
