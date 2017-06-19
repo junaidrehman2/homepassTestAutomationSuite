@@ -1,139 +1,154 @@
 var request = require('sync-request');
 var uuidV4 = require('uuid/v4');
 var moment = require('moment');
+var uuid = uuidV4(); 
 
 
 class Properties {
-	get img() { return $("img[size]"); }
-	get detailsTab() {return $("//div[text()='Details']");}
-	get selectedAccount() { return $("//div[text()='Blu Property Automated test suite office public']"); }
-	get settings() { return $("//a//span[text() = 'settings']"); }
-	get propertySeclectorAREC() { return $("//button/following-sibling::div[text()='2015 AREC Auditorium']"); }
-	get searchIcon() { return $("//span[text()='search']"); }
-	get searchInput() { return $("//div[text()='Address']/following-sibling::input"); }
-	get closeIcon() { return $("//span[text()='close']"); }
-	get UnstarIconPropDetails() { return $("//span[text()='star_border']"); }
-	get staredIconPropDetails() { return $("//span[text()='star']"); }
-	get filterIcon() { return $("//span[text()='filter_list']"); }
-	get backArrow() { return $("//span[text()='arrow_back']"); }
-	get showAll() { return $("//div[text()='Sale Only']"); }
-	get showArchive() { return $("//div[text()='Show Archived']"); }
-	get saleOnly() { return $("//div[text()='Sale Only']"); }
-	get rentOnly() { return $("//div[text()='Rent Only']"); }
-	get hpIdForAREC() { return $("//div[text()='Homepass ID']/following-sibling::div"); }
-	get propertySeclectorHorace() { return $("//button/following-sibling::div[text()='7 Horace Street']"); }
-	get propertySeclectorKent() { return $("//button/following-sibling::div[text()='2/33 Kent Grove']"); }
-	get propertySeclectorElizbeth() { return $("//button/following-sibling::div[text()='16 Elizabeth Street']"); }
-	get proprtyToStart() { return $("//div[text()='2015 AREC Auditorium']/preceding-sibling::button/div/span"); }
-	get addDocs() {return $("//div[text()='ADD DOCUMENTS']");}
-	get deleteFileWithGoogleText() {return $("//div[text()='google.jpg']/preceding-sibling::button");}
-	get fileNameWithGoogleText() {return $("//div[text()='google.jpg']");}
-	get webImgFileStackLink() {return $("a[href$='Imagesearch']");}
-	get googleDriveFileStackLink() {return $("a[href$='GoogleDrive']");}
-	get webImgFileStackSearchTextBox() {return $("input[placeholder='Search for']");}
-	get webImgFileStackSearchButton() {return $("input[value='Search']");}
-	get firstItemWebImgFileStackSearch() {return $("//div[@class='grid__item'][1]");}
-	get selectFile() {return $("//a[text()='Select one file']");}
-	get uploadButton() {return $("//button[text()='Upload']");}
-	get filePickerIframe() {return $("iframe[name='filepicker_dialog']");}
-	get addPropertyRef() {return $("//div[text()='ADD LINKED RECORD']");}
-	get refIdInput() {return $("//label[text()='Integration Reference ID']/following-sibling::input");}
-	get refIdSaveButton() {return $("//span[text()='Save']");}
-	get refIdText() {return $("//div[text()='R2-6767']");}
-	get refIdTextEdited() {return $("//div[text()='R2-67674']");}
-	get editRefId() {return $("//div[text()='Edit linked record']");}
-	get settingsButtonRef() {return $("//div[text()='R2-6767']/..//button");}
-	get settingsButtonRefEdited() {return $("//div[text()='R2-67674']/..//button");}
-	get removeLinkedRecord() {return $("//div[text()='Remove linked record']");}
-	get propertyId() {return $("//div[text()='Homepass ID']/following-sibling::div");}
-	get vendorSnapshotLink() {return $("//div[text()='Vendor Snapshot']");}
-	get kentPropertyId() {return '5588c2e8b91d24fd0f43a8a0';}
-	get propertyDetailsSettingsButton() {return $("//button[contains(.,'star')]/following-sibling::div");}
-	get archivePropertyLink() {return $("//div[text()='Archive property']");}
-	get unarchivePropertyLink() {return $("//div[text()='Unarchive property']");}
-	get propertyArchived() {return $("//div[text()='archived']");}
-	get testCheckin() {return $("//div[text()='Chu test checkin']");}
-	get testCheckinDate() {return $("//div[text()='Chu test checkin']/following-sibling::div//time");}
-	get contacts() {return $("//div[text()='Contacts']");}
-	get activity() {return $("//div[text()='Activity']");}
-	get checkinMoreButton() {return $("//div[text()='Chu test checkin']/preceding-sibling::div[1]");}
-	get flag() {return $("//div[text()='Flag']");}
-	get unFlag() {return $("//div[text()='Unflag']");}
-	get activityDate() {return $("//div[contains(.,'Chu test checkin')]/following-sibling::div//time");}
-	get activityCheckin() {return $("//div[contains(.,'Chu test checkin')]");}
-	get activityFlag() {return $("//div[contains(.,'Chu test checkin')]/span");}
-	get flaggedElement() {return $("//div[text()='Chu test checkin']/following-sibling::div[contains(.,'FLAGGED')]");}
-	get addVendor() {return $("//div[text()='ADD CONTACT']");}
-	get vendorNameInput() {return $("//h3[text()='Add vendors']/following-sibling::div//input");}
-	get createNewVendorLink() {return $("//div[text()='Create new contact']");}
-	get vendorEmailInput() {return $("//div[text()='Email']/following-sibling::input");}
-	get vendorMobileInput() {return $("//label[text()='Mobile']/following-sibling::input");}
-	get saveVendor() {return $("//span[text() = 'Save']");}
-	get vendorName() {return $("//div[text()='test Vendor']");}
-	get vendorMoreButton() {return $("//div[text()='test Vendor']/preceding-sibling::div[1]");}
-	get removeVendor() {return $("//div[text()='Remove Vendor']");}
-	get viewVendorSnapshotLink() {return $("//div[text()='View vendor snapshot']");}
-	get addVendorHeaderText() {return $("//h3[text()='New Contact']")}
+	get openNavigationDrawer() { return $("//android.widget.ImageButton[@content-desc = 'Open navigation drawer']"); }
+	get SettingsLink() { return $("//*[@text = 'Settings']"); }
+	get account() { return $("//*[@text = 'Account']"); }
+	get about() { return $("//*[@text = 'About']"); }
+	get accountToChangeTo() { return $("//*[@text = 'Blu Property Automated test suite office public']"); }
+	get backArrowInAccoutPage() { return $("//android.widget.ImageView[@index = '0']"); }
+	get ARECproperty() { return $("//*[@text = '2015 AREC Auditorium']"); }
+	get kentProperty() { return $("//*[@text = '2/33 Kent Grove']"); }
+	get checkinButton() { return $("//*[contains(@resource-id, 'add_visitor_fab')]"); }
+	get nextButtonOnCheckinScreen() { return $("//*[@text = 'Next' or @text = 'NEXT']"); }
+	get doneButtonOnCheckinScreen() { return $("//*[@text = 'Done' or @text = 'DONE']"); }
+	get nameFieldCheckinScreen() { return $("//*[contains(@resource-id, 'name_editText')]"); }
+	get firstNameFieldCheckinScreen() { return $("//*[contains(@resource-id, 'firstName_editText')]"); }
+	get lastNameFieldCheckinScreen() { return $("//*[contains(@resource-id, 'lastName_editText')]"); }
+	get mobileFieldCheckinScreen() { return $("//*[contains(@resource-id, 'mobile_editText')]"); }
+	get landlineFieldCheckinScreen() { return $("//*[contains(@resource-id, 'landline_editText')]"); }
+	get emailFieldCheckinScreen() { return $("//*[contains(@resource-id, 'email_editText')]"); }
+	get addressFieldCheckinScreen() { return $("//*[contains(@resource-id, 'address_editText')]"); }
+	get noteFieldCheckinScreen() { return $("//*[contains(@resource-id, 'notes_editText')]"); }
+	get testCheckin() { return $("//*[@text = 'Android Test Checkin']"); }
+	get moreButtonPropertyActivity() { return $("//*[contains(@resource-id, 'action_more_layout')]"); }
+	get addInspectionNote() { return $("//*[@text = 'Add inspection note']"); }
+	get addNoteText() { return $("//*[contains(@resource-id, 'add_note_text')]"); }
+	get saveButtonAddNoteScreen() { return $("//*[@text = 'Save' or @text = 'SAVE']"); }
+	get testNote() { return `android test note ${uuid}`; }
+	get testNoteElement() { return $(`//*[@text = 'android test note ${uuid}']`); }
+	get contactActivity() { return $("//*[@text = 'Activity']"); }
+	get editNote() { return $("//*[@text = 'Edit']"); }
+	get testNoteElementEdited() { return $("//*[@text = 'note edited']"); }
+	get deleteNote() { return $("//*[@text = 'Delete']"); }
+	get openSendDocsView() { return $("//*[@text = 'Send document']"); }
+	get sendTheDocs() { return $("//*[contains(@resource-id, 'action_send')]"); }
+	get fileSent() { return $("//*[@text = 'logo_13464.GIF']"); }
+	get contactDetails() { return $("//*[@text = 'Details']"); }
+	get addContactNote() { return $("//*[@text = 'Add Contact Note']"); }
+	get testContactNote() { return $("//*[@text = 'test contact note']"); }
+	get flag() { return $("//*[@text = 'Flag']"); }
+	get unFlag() { return $("//*[@text = 'Unflag']"); }
+	get flagIcon() { return $("//*[contains(@resource-id, 'flag_icon')]"); }
+	get deleteVisit() { return $("//*[@text = 'Delete visit']"); }
+	get vendorNote() { return $("//*[@text = 'Inspection note added (vendor visible)']"); }
+	get kioskLink() { return $("//*[@text = 'Kiosk mode']"); }
+	get kioskCheckInButtons() { return $("//*[contains(@resource-id, 'checkin_button')]"); }
+	get InspectionText() { return $("//*[@text = 'Enjoy your inspection!']"); }
+	get kioskTestCheckin() { return $("//*[@text = 'Android checkin kiosk']"); }
+	get properties() { return $("//*[@text = 'Properties']"); }
+	get testOffice() { return $("//*[@text = 'Blu Property Automated test suite office public']"); }
+	get broadcastMessageLink() { return $("//*[@text = 'Broadcast Message']"); }
+	get sendMobileBrochure() { return $("//*[@text = 'Send mobile brochure']"); }
+	get sendVendorSnapshot() { return $("//*[@text = 'Send vendor snapshot']"); }
+	get addVendorLink() { return $("//*[@text = 'Vendor snapshot']"); }
+	get addVendor() { return $("//*[@text = 'Auto send']"); }
+	get showVendorNotes() { return $("//*[@text = 'Show Vendor Visible Notes ON']"); }
+	get hideVendorNotes() { return $("//*[@text = 'Show Vendor Visible Notes OFF']"); }
+	get showSendDocs() { return $("//*[@text = 'Show Docs Send ON']"); }
+	get hideSendDocs() { return $("//*[@text = 'Show Docs Send OFF']"); }
+	get snapshotElement() { return $("//*[contains(@content-desc , '3161')]"); }
+	get snapshotElement2() { return $("//*[contains(@content-desc , 'ACTIVITY')]"); }
+	get notFollowingProperties() { return $("//*[@text = 'to star a property']"); }
+	get detailsTab() { return $("//*[@text = 'DETAILS' or @text = 'Details']"); }
+	get testVendor() { return $("//*[@text = 'testVendor']"); }
+	get removeVendor() { return $("//*[@text = 'Remove Vendor']"); }
+	get nameFieldErrorMessage() { return $("//*[contains(@text , 'be blank')]"); }
+	get requiredFeiledError() { return $("//*[@text = 'Please enter a mobile, landline or email']"); }
+	get phoneFieldErrorMessage() { return $("//*[@text = 'Invalid phone number']"); }
+	get emailFieldErrorMessage() { return $("//*[@text = 'Invalid email address']"); }
+	get signIn() { return $("//*[@text = 'Sign in with Mobile']"); }
+	get loginMobileFiled() { return $("//android.widget.EditText"); }
+	get verificationCodeField() { return $("//*[@text = 'Verification Code']"); }
+	get signOut() { return $("//[@text = 'Sign Out']"); }
+	get testContactNoteText() { return "test contact note" }
+	get editedtNoteText() { return "note edited" }
+	get editDetails() { return $("//*[@text = 'Edit details']"); }
+	get editCheckin() { return $("//*[@text = 'checkin edited']"); }
+	get editedMobile() { return $("//*[@text = '+61 458 485 562']"); }
+	get editedEmail() { return $("//*[@text = 'homepasstest@gmail.com']"); }
+	get settingsNotification() { return $("//*[@text = 'Notifications']"); }
+	get settingsRegion() { return $("//*[@text = 'Region']"); }
+	get settingsContacts() { return $("//*[@text = 'Contacts']"); }
+	get inspectionReminderNotifcationOff() { return $("//*[@text = '//*[@text = 'Inspection Reminder']/following-sibling::*[@text = 'OFF']"); }
+	get inspectionReminderNotifcationOn() { return $("//*[@text = '//*[@text = 'Inspection Reminder']/following-sibling::*[@text = 'On']']"); }
+	get checkInNotificationOff() { return $("//*[@text = 'Check ins']/following-sibling::*[@text = 'OFF']"); }
+	get checkInNotificationOn() { return $("//*[@text = 'Check ins']/following-sibling::*[@text = 'ON']"); }
+	get regionSearch() { return $("//android.widget.EditText"); }
+	get regionAustralia() { return $("//*[@text = 'Australia']"); }
+	get regionNewZealand() { return $("//*[@text = 'New Zealand']"); }
+	get regionPakistan() { return $("//*[@text = 'Pakistan']"); }
+	get regionBackButton() { return $("//android.view.ViewGroup[android.widget.TextView[@text =  'Region']]/preceding-sibling::android.view.ViewGroup"); }
+	get phoneContactsOFF() { return $("//*[@text = 'Phone Contacts']/../following-sibling::android.view.ViewGroup[android.widget.Switch[@text = 'OFF']]"); }
+	get phoneContactsOn() { return $("//*[@text = 'Phone Contacts']/../following-sibling::android.view.ViewGroup[android.widget.Switch[@text = 'ON']]"); }
+	get contactsBackButton() { return $("//android.view.ViewGroup[android.widget.TextView[@text =  'Contacts']]/preceding-sibling::android.view.ViewGroup"); }
+	get checkInInvalidNo() { return $("//*[@text = 'Yes, check in']"); }
+	get dontCheckinInvalidNo() { return $("//*[@text = 'No']"); }
+	get InvalidMobile() { return $("//*[@text = 'Invalid mobile']"); }
+	// get () { return $("//*[@text = '']"); }
+	// get () { return $("//*[@text = '']"); }
+	// get () { return $("//*[@text = '']"); }
+	// get () { return $("//*[@text = '']"); }
+	// get () { return $("//*[@text = '']"); }
+	// get () { return $("//*[@text = '']"); }
+	// get () { return $("//*[@text = '']"); }
 
-    getProperty(property) {
-    	var res = request('POST', browser.options.testApiUrl+'csm/v1/findListings', {
-    		headers: {Authorization : 'Basic EvdaQ5PHdmemnssnT9LmQ66T7Q3s4Ey8'}, 
-    		json: { listingIds : [property] }
+
+
+	get propertySearchButton() { return $("//*[contains(@resource-id, 'action_search')]"); }
+	get backArrowContactDetails() { return $("//*[contains(@content-desc, 'up')]"); }
+	get addNoteVisibilitySwitch() { return $("//*[contains(@resource-id, 'add_note_visibility_switch')]"); }
+	get propertyDetailsMoreButton() { return $("//*[contains(@resource-id, 'dropdown_menu')]"); }
+	get starUnstar() { return $("//*[contains(@resource-id, 'action_star_unstar')]"); }
+	get searchPropertyTextBox() { return $("//*[contains(@resource-id, 'search_src_text')]"); }
+	get searchCloseButton() { return $("//*[contains(@resource-id, 'search_close_btn')]"); }
+	get loading() { return $("//*[contains(@resource-id, 'loading')]"); }
+	get signOutDialog() { return $("//*[contains(@resource-id, 'button2')]"); }
+	get saveEditedContact() { return $("//*[contains(@resource-id, 'action_save')]"); }
+	get editContactDetailsNametextBox() { return $("//*[contains(@resource-id, 'contact_details_name')]"); }
+	get editContactDetailsMobiletextBox() { return $("//*[contains(@resource-id, 'contact_details_mobile')]"); }
+	get editContactDetailsEmailtextBox() { return $("//*[contains(@resource-id, 'contact_details_email')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	// get () { return $("//*[contains(@resource-id, '')]"); }
+	get backButtonSearchBar() { return $("//*[@content-desc = 'Collapse']"); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+	// get () { return $(""); }
+
+
+    getCode() {
+    	var res = request('GET', "https://api.twilio.com/2010-04-01/Accounts/ACbabcc8fc9feb3cc2304ebe6b199bfae4/Messages.json?To=61406111989", {
+    		headers: {authorization: 'Basic ' + Buffer('ACbabcc8fc9feb3cc2304ebe6b199bfae4:d015bbb6524457003ce07ff2eae300e3').toString('base64')} 
     	}); 
 
-    	var property = JSON.parse(res.getBody().toString('utf8'));
-    	return property.listings[0];
+    	var code = JSON.parse(res.getBody().toString('utf8')).messages[0].body;
+    	return code.substring(code.length - 4);
     }
 
-    addCheckin(fullname = 'Chu test checkin'){
-    	var res = request('POST', browser.options.testApiUrl+'graphql', {
-    		headers: {Authorization : 'Bearer '+browser.options.token}, 
-    		json: {  
-    			"query":"mutation ($checkinInput:AddCheckinInput!) { addCheckin(input: $checkinInput) { listing { listingId contactCount flaggedCount } checkin {id checkinId ref checkinDate listingContact {id visits lastVisit noteCount hasSentDocs flagged contact{id contactId fullName firstName lastName imageUrl mobile landline email address customer{id customerId}} checkins { edges { node { id checkinId ref checkinDate listingContact {id visits lastVisit noteCount hasSentDocs flagged contact{id contactId fullName firstName lastName imageUrl mobile landline email address customer{id customerId}}} } } }}} } }",
-    			"variables":{  
-    				"checkinInput":{  
-    					"address":"Level 22, 530 Collins St, Melbourne VIC 3000, Australia",
-    					"applicationId":"dlWUg9j4lt8QLA3EdQYOXJxBoiJCW7KYVDy0z9Rk",
-    					"checkinDate": new Date(),
-    					"clientMutationId":"ADD-CHECKIN-4f157ce6-416c-40b4-ae76-acec95c1a197",
-    					"contactNote":"This is a Contact note",
-    					"contactNoteShared":true,
-    					"email":"cmyeoh@gmail.com",
-    					"fullName":fullname,
-    					"instrument":"Homepass",
-    					"landline":"+6163259845",
-    					"listingId":"548e62854be1d336770d7a83",
-    					"mobile":"+61430435060",
-    					"notify":false,
-    					"ref":uuidV4()
-    				}
-    			}
-    		}
-    	}); 
-
-    	return res.statusCode; 
-    }
-
-    addNote(){
-    	var contact = ''; 
-
-    	if(process.env.SERVER === 'sandbox'){
-    		contact = '58ef0b719cfbeb0d14af0ee1'; 
-    	} else if(process.env.SERVER === 'prod'){
-    		contact = "5905a2791e71aff20ce940d4"; 
-    	}else if(process.env.SERVER === 'staging'){
-    		contact = "58edd8266a1fe54e45874a92";
-    	}
-
-    	var res = request('POST', browser.options.testApiUrl+'graphql', {
-    		headers: {Authorization : 'Bearer '+browser.options.token}, 
-    		json: {  
-    			"query":`mutation { \n  addNote(input:{\n       attachedToId:\"548e62854be1d336770d7a83\"\n    attachedToType:LISTING\n    clientMutationId:\"ADD-NOTE-3d9160b1-f763-4446-b0ec-d688fe2dc003\"\n    contactId:\"${contact}\"\n    isVendorComment:true\n    ref:\"${uuidV4()}\" \n    shared:false\n    text:\"note${uuidV4()}\"\n  }) { \n    note { text }\n    } \n  } `
-    		}	
-    	}); 
-
-    	return JSON.parse(res.getBody().toString('utf8')).data.addNote.note.text; 
-    }
 
     compareDates(minToSubtract, checkinDate){
     	return moment().subtract(minToSubtract, 'minutes') <  moment(checkinDate)? true : false;

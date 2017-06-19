@@ -1,33 +1,25 @@
-var baseUrl = '';
-var backendApi = '';
-var brochureLink = ''; 
-var sandboxToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0ODk5NzI3NTIsImV4cCI6MTUyMTUwODc1MiwiYXVkIjoibUF6eEZ0QlZnWWlTWFRpQlBJWThNWGdBZkZMQjdMOVYiLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.VAHnwE5XrrnDMRcoTzt_pwPXUjTEbbu-ctYAS000mfY";
-var prodToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE0OTE4OTQ2MDMsImV4cCI6MTUyMzQzMDYwMywiYXVkIjoidjFuSnpMZXpOYmliYm1OeHFjSnJaQjdaZm5qODR4bU0iLCJpc3MiOiJodHRwczovL2hvbWVwYXNzLmF1dGgwLmNvbS8iLCJzdWIiOiJzbXN8NTc1N2ExYWY4M2M5MGE4YTkzMTEwOWE3In0.T-Bhke1ZWFNADH0IB8qrgdIqI1lrtFb5kErxYNFq0xM"; 
-var jwtToken = '';
-var specificListingPageLink = ''; 
-
+var userIdForPromoteDemoteUser = ''
+var property = ''
+var loggedInUser = ''
+var annotationId = ''
 
 if (process.env.SERVER === "sandbox"){
-    baseUrl = 'https://sandbox-domain-webapp.homepass.com';
-    backendApi = 'https://data-sandbox.homepass.com/';
-    brochureLink = 'https://live-sandbox.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
-    jwtToken = sandboxToken;
-    specificListingPageLink = '/manage/accounts/QWNjb3VudDo1OGI5MDBjOGU1NzJlZmYwNjA2NWRjODM=/listings/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=/contacts';
+ userIdForPromoteDemoteUser = '578d8bb862ed0dcc37d3a669'
+ property = '5588c2e8b91d24fd0f43a8a0'
+ loggedInUser = '57e0cd6275200bef3697766f'
+ annotationId = '5594c865b87e3083ada4ae6c'
 } else if (process.env.SERVER === "staging"){
-    baseUrl = 'https://staging-domain-webapp.homepass.com';
-    backendApi = 'https://data-staging.homepass.com/';
-    brochureLink = 'https://live-staging.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
-    jwtToken = sandboxToken;
+
 }else if (process.env.SERVER === "prod"){
-    baseUrl = 'https://app.homepass.com';
-    backendApi = 'https://data.homepass.com/';
-    brochureLink = 'https://live.homepass.com/listing/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=';
-    jwtToken = prodToken;
-    specificListingPageLink = '/manage/accounts/QWNjb3VudDo1N2FjMzY1ZTk3NWMxMTFjNDk1NTc2NmE=/listings/TGlzdGluZzo1NDhlNjI4NTRiZTFkMzM2NzcwZDdhODM=/details'
+
 }
 
 exports.config = {
 
+  userIdForPromoteDemoteUserOpt : userIdForPromoteDemoteUser,
+  propertyOpt: property,
+  loggedInUserOpt: loggedInUser,
+  annotationIdOpt: annotationId,
     //
     // ==================
     // Specify Test Files
@@ -39,15 +31,12 @@ exports.config = {
     //
     specs: [
     './test/**/*.js'
+    // './androidTests/**/*.js'
     ],
     // Patterns to exclude.
     exclude: [
     './test/pages/*.js',
-    // './test/accountPreferences.js',
-    // './test/userDetails.js',
-    // './test/propertyDetails.js', 
-    // './test/propertyList.js',
-    // './test/brochure.js'
+    // './test/propertyActivities.js',
     ],
     //
     // ============
@@ -65,20 +54,71 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://docs.saucelabs.com/reference/platforms-configurator
     //
+    host: '127.0.0.1',
+    port: 4723,
+
     capabilities: [{
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 2,
-        //
-        browserName: 'chrome'
-    }],
+      autoGrantPermissions: true,
+      context: 'NATIVE_APP',
+      udid: "8190dab3",
+      // automationName: "XCUITest",
+      // realDeviceLogger: "idevicesyslog",
+      // udid: "410037dbe46ea197",
+      // udid: "ce03171331824a3b03",
+       platformName: 'android',
+       platformVersion: '6.0.1',
+       deviceName: 'android',
+       noReset: true,
+       unicodeKeyboard: true,
+       resetKeyboard:true,
+       appiumVersion: '1.6.5',
+       //------------------------------------------------------------
+       //EMULATOR
+       // platformName: 'Android',
+       // platformVersion: '7.1.1',
+       // deviceName: 'Nexus 6P API 25',
+       // uuid: "emulator-5554",
+       //------------------------------------------------------------
+       orientation: 'PORTRAIT',
+       app: '/Users/junaid/Downloads/homepass.apk',
+       appActivity: 'com.homepass.agent.app.activities.SplashActivity',
+       appWaitActivity: 'com.homepass.agent.app.activities.SplashActivity, com.homepass.agent.app.activities.HomeActivity'
+     }],
+   
+   appium: {
+    waitStartTime: 6000,
+    command: 'appium',
+    logFileName: 'appium163.log',
+    args: {
+      // autoGrantPermissions: true,
+      // udid: "410037dbe46ea197", 
+      // port: 4723,
+      // address: '127.0.0.1',
+      // commandTimeout: '7200',
+      // sessionOverride: true,
+      // debugLogSpacing: true,
+      // platformName: 'Android',
+      // platformVersion: '6.0.1',
+      // deviceName: 'Homepass (Galaxy Note4)',
+     //-------------------------------------------------------------- 
+     // platformName: 'Android',
+     //   platformVersion: '7.1.1',
+     //   deviceName: 'Nexus 6P API 25',
+     //    uuid: "emulator-5554",
+     //--------------------------------------------------------------
+     // showIosLog: true,
+     // nativeInstrumentsLib: true,
+     // isolateSimDevice: true,
+     // app: '/Users/junaid/Downloads/homepass.apk'
+
+   }
+ },
     //
     // ===================
     // Test Configurations
@@ -91,7 +131,7 @@ exports.config = {
     sync: true,
     //
     // Level of logging verbosity: silent | verbose | command | data | result | error
-    logLevel: 'silent',
+    logLevel: 'verbose',
     //
     // Enables colors for log output.
     coloredLogs: true,
@@ -101,14 +141,14 @@ exports.config = {
     bail: 0,
     //
     // Saves a screenshot to a given path if a command fails.
-    screenshotPath: './errorShots/',
+    // screenshotPath: './errorShots/',
     //
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
-    baseUrl: baseUrl,
+    baseUrl: 'http://localhost',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 20000,
+    waitforTimeout: 40000,
     //
     // Default timeout in milliseconds for request
     // if Selenium Grid doesn't send response
@@ -139,14 +179,32 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['selenium-standalone'],//
+    // services: ['selenium-standalone'],//
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
     // see also: http://webdriver.io/guide/testrunner/frameworks.html
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
+
+     // services: ['selenium-standalone'],
+  // appium: {
+  //   args: {
+  //     address: '127.0.0.1:4723',
+  //     commandTimeout: '7200',
+  //     sessionOverride: true,
+  //     debugLogSpacing: true,
+  //     platformVersion: '6.1',
+  //     platformName: 'Android',
+  //     showIosLog: true,
+  //     deviceName: 'Homepass (Galaxy Note)',
+  //     nativeInstrumentsLib: true,
+  //     isolateSimDevice: true,
+  //     app: './apk/homepass.apk'
+  //   }
+  // },
+
+  framework: 'mocha',
     //
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
@@ -156,8 +214,8 @@ exports.config = {
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
     mochaOpts: {
-        ui: 'bdd',
-        timeout: 30000
+      ui: 'bdd',
+      timeout: 1500000
     },
     //
     // =====
@@ -179,27 +237,11 @@ exports.config = {
     //
     // Gets executed before test execution begins. At this point you can access all global
     // variables, such as `browser`. It is the perfect place to define custom commands.
-    token: jwtToken,
+    // token: jwtToken,
     
 
     before: function (capabilities, specs) {
       expect  = require('chai').expect; 
-          // var login  = require('./test/pages/login.page.js');
-          // login.googleLogin(process.env.EMALE, process.env.PASS);
-          // browser.debug();
-          browser.url('/')
-          if(process.env.SERVER === 'prod' ){
-              browser.localStorage('POST', {key: 'userToken', value: '{"value":"'+prodToken+'"}'});
-          }else{
-              browser.localStorage('POST', {key: 'userToken', value: '{"value":"'+sandboxToken+'"}'});
-          }
-          browser.setViewportSize({
-            width: 1200,
-            height: 1000
-        });
-          browser.refresh();
-
-
       },
     //
     // Hook that gets executed before the suite starts
@@ -230,6 +272,10 @@ exports.config = {
     //
     // Function to be executed after a test (in Mocha/Jasmine) or a step (in Cucumber) starts.
     // afterTest: function (test) {
+      // if (test.title === "should add a kiosk checkin") {
+      //   const x = require('./ex')
+      //   x.fu()
+      // }
     // },
     //
     // Hook that gets executed after the suite has ended
@@ -250,7 +296,8 @@ exports.config = {
     // onComplete: function(exitCode) {
     // }
 
-    testApiUrl: backendApi,
-    brochure: brochureLink,
-    specificListingLink: specificListingPageLink
-}
+    // testApiUrl: backendApi,
+    // brochure: brochureLink,
+    // specificListingLink: specificListingPageLink
+
+  }
