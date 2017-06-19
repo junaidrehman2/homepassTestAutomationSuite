@@ -66,14 +66,14 @@ exports.config = {
     capabilities: [{
       autoGrantPermissions: true,
       context: 'NATIVE_APP',
-      udid: "8190dab3",
-      // automationName: "XCUITest",
-      // realDeviceLogger: "idevicesyslog",
+      udid: "F20CB0DE-022E-40CA-A82A-91877072E20C",
+      automationName: "XCUITest",
+      realDeviceLogger: "idevicesyslog",
       // udid: "410037dbe46ea197",
       // udid: "ce03171331824a3b03",
-       platformName: 'android',
-       platformVersion: '6.0.1',
-       deviceName: 'android',
+       platformName: 'iOS',
+       platformVersion: '10.3',
+       deviceName: 'iPhone 6',
        noReset: true,
        unicodeKeyboard: true,
        resetKeyboard:true,
@@ -86,9 +86,9 @@ exports.config = {
        // uuid: "emulator-5554",
        //------------------------------------------------------------
        orientation: 'PORTRAIT',
-       app: '/Users/junaid/Downloads/homepass.apk',
-       appActivity: 'com.homepass.agent.app.activities.SplashActivity',
-       appWaitActivity: 'com.homepass.agent.app.activities.SplashActivity, com.homepass.agent.app.activities.HomeActivity'
+       app: '/Users/junaid/Library/Developer/Xcode/DerivedData/AgentOFI-bxhksehfpokugbgcljwmjmuvawqx/Build/Products/Debug-iphonesimulator/Homepass.app',
+       // appActivity: 'com.homepass.agent.app.activities.SplashActivity',
+       // appWaitActivity: 'com.homepass.agent.app.activities.SplashActivity, com.homepass.agent.app.activities.HomeActivity'
      }],
    
    appium: {
