@@ -2,11 +2,11 @@ const propertyPage  = require('./pages/properties.page.js')
 const bookings  = require('./pages/bookings.page.js')
 const settings  = require('./pages/settings.page.js')
 const uuidV4 = require('uuid/v4')
-// const db  = require('../db/dbController')
+const db  = require('../db/dbController')
 var waitFlag = false 
 var dataBacked = null
 var noteId = null
-var contactId = "593a2be639ffad107d2c998e"
+var contactId = ""
 var checkinId = null
 var vendorId = null
 var attendeeId = null
@@ -20,8 +20,8 @@ describe('property activities', function() {
 		propertyPage.loginMobileFiled.waitForExist()
 		propertyPage.loginMobileFiled.addValue("0406111989")
 		propertyPage.nextButtonOnCheckinScreen.click()
-		propertyPage.loginMobileFiled.waitForExist()
-		propertyPage.loginMobileFiled.addValue(propertyPage.getCode())
+		propertyPage.verificationCodeField.waitForExist()
+		propertyPage.verificationCodeField.addValue(propertyPage.getCode())
 		propertyPage.nextButtonOnCheckinScreen.click()
 	});
 
