@@ -2,7 +2,7 @@ var userIdForPromoteDemoteUser = ''
 var property = ''
 var loggedInUser = ''
 var annotationId = ''
-
+  // "webdriverio": "^4.7.1"
 if (process.env.SERVER === "sandbox"){
  userIdForPromoteDemoteUser = '578d8bb862ed0dcc37d3a669'
  property = '5588c2e8b91d24fd0f43a8a0'
@@ -11,6 +11,10 @@ if (process.env.SERVER === "sandbox"){
 } else if (process.env.SERVER === "staging"){
 
 }else if (process.env.SERVER === "prod"){
+   userIdForPromoteDemoteUser = '578d8bb862ed0dcc37d3a669'
+ property = '592f9f7fecf84bfac01370af'
+ loggedInUser = '5757a1c317c48f27519ca6b6'
+ annotationId = '5594c865b87e3083ada4ae6c'
 
 }
 
@@ -66,14 +70,17 @@ exports.config = {
     capabilities: [{
       autoGrantPermissions: true,
       context: 'NATIVE_APP',
-      udid: "F20CB0DE-022E-40CA-A82A-91877072E20C",
+      udid: /*"4a2bdb97cb795d266915f4314970488282e07625",*/"C0E22101-729B-414C-AA84-58DE4B14BEBA",
       automationName: "XCUITest",
       realDeviceLogger: "idevicesyslog",
+      nativeInstrumentsLib: true,
+      browserName: 'chrome',
+      allowTouchIdEnroll: true,
       // udid: "410037dbe46ea197",
       // udid: "ce03171331824a3b03",
        platformName: 'iOS',
        platformVersion: '10.3',
-       deviceName: 'iPhone 6',
+       deviceName: 'iPhone 6 pluse',
        noReset: true,
        unicodeKeyboard: true,
        resetKeyboard:true,

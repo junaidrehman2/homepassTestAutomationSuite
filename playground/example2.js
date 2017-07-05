@@ -127,7 +127,7 @@ const db  = require('../db/dbController')
 // 	console.log(data);
 // })
 
-db.getInterested('5937655ad5fa1be012b2068c', '5594c865b87e3083ada4ae6c', (data) => {
+db.getFollowing('5757a1c317c48f27519ca6b6', '5588c2e8b91d24fd0f43a8a0', (data) => {
 	console.log(data)
 })
 // const checkin  = require('../db/models/checkinModel')

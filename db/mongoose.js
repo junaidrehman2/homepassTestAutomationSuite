@@ -10,3 +10,5 @@ if(process.env.SERVER == 'prod'){
 
 
 module.exports = {mongoose};
+
+//export MONGODB_URI_SANDBOX=mongodb://user:hCObQC2SpNETMgY@ds057413-a0.mongolab.com:57413/sandbox-domain
